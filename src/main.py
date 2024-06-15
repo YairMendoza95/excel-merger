@@ -17,7 +17,7 @@ def main():
     print(f"Archivos excel encontrados {excel_files}")
 
     all_data = pd.DataFrame()
-    has_headers = True
+    has_headers = False
 
     for file_path in excel_files:
         print(f"Leyendo archivo: {file_path}")
