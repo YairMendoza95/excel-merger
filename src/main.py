@@ -17,23 +17,25 @@ def main():
     print(f"Archivos excel encontrados {excel_files}")
 
     all_data = pd.DataFrame()
-    has_headers = False
 
     for file_path in excel_files:
         print(f"Leyendo archivo: {file_path}")
-        df = read_excel_files(file_path, skiprows=2, has_headers=has_headers)
+        first_file = True
 
-        if not has_headers:
-            all_data = df
-            has_headers = True
-        else:
-            all_data = pd.concat([all_data, df], ignore_index=True)
+        for df in read_excel_files(file_path, skiprows=2, has_headers=not first_file):
+            if first_file:
+                all_data = df
+                first_file = False
+            else:
+                all_data.append(df[3:])
 
-    if all_data.empty:
-        print("No se han leído datos de los archivos Excel")
-    else:
-        all_data.to_csv(OUTPUT_CSV_PATH, index=False, quoting=csv.QUOTE_MINIMAL, quotechar="'")
+    if all_data:
+        data = pd.concat(all_data, ignore_index=True)
+        data.to_csv(OUTPUT_CSV_PATH, index=False, quoting=csv.QUOTE_MINIMAL, quotechar="'")
         print(f"Datos guardados en la ruta {OUTPUT_CSV_PATH}")
+    else:
+        print("No se han leído datos de los archivos Excel")
+
 
 if __name__ == "__main__":
     main()
