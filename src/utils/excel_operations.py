@@ -1,7 +1,7 @@
 import re
 
 import pandas as pd
-from src.utils.data_operations import fill_empty_fields, columns_renamer,remove_columns
+from src.utils.data_operations import fill_empty_fields, columns_renamer
 
 
 def process_excel_file(file_path):
@@ -20,7 +20,5 @@ def process_excel_file(file_path):
 
         combined_df = pd.concat([combined_df, df], ignore_index=True)
 
-
-    combined_df = remove_columns(combined_df)
     return combined_df
 

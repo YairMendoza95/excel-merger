@@ -19,9 +19,9 @@ def columns_renamer(df):
         'JAULAS': 'jaulas',
         'CLIENTE': 'cliente',
         'CHOFER': 'chofer',
-        "POLLOS": 'pollos_programados',
+        "P. POLLOS": 'pollos_programados',
         'P. PROMEDIO': 'promedio_programado',
-        'POLLOS.1': 'pollos',
+        'POLLOS': 'pollos',
         'SEXO': 'sexo',
         'P. BRUTO': 'peso_bruto',
         'P. TARA': 'peso_tara',
@@ -56,9 +56,3 @@ def columns_renamer(df):
     df = df.rename(columns=columns_mapping)
 
     return df
-
-
-def remove_columns(df):
-    columns_removed = ['P. POLLOS', 'G']
-
-    return df.drop(columns=columns_removed, errors='ignore')
